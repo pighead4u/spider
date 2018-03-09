@@ -14,31 +14,27 @@
 
 import time
 
+import data
 import requests
-import xlwt
 
 
 class Crawl:
 
-    def __init__(self, city, filename):
+    def __init__(self, city, filename, searchername):
         self.city = city
         self.filename = filename
-        self.excel = xlwt.Workbook()
-        self.sheet = self.excel.add_sheet('lagou', cell_overwrite_ok=True)
-        self.line = 1;
+        self.searchername = searchername
 
     def getjobdata(self, pagesize):
 
         for pn in [x + 1 for x in range(pagesize)]:
             data = self._build_request_data(pn)
             response = self._get_http_data(self.city, data)
-            is_stop = self._write_data_2file(response)
+            is_stop = self._write_data_2db(response)
             time.sleep(2)
 
             if is_stop:
                 break
-
-        self.excel.save('{fileName}.xlsx'.format(fileName=self.filename))
 
     def _build_request_data(self, pagenumb):
         if pagenumb == 1:
@@ -49,7 +45,7 @@ class Crawl:
         data = {
             'first': is_first,
             'pn': str(pagenumb),
-            'kd': 'Android',
+            'kd': self.searchername,
         }
         return data
 
@@ -69,35 +65,27 @@ class Crawl:
 
         return response
 
-    def _write_data_2file(self, response):
+    def _write_data_2db(self, response):
         result = response.json()
         if result.get('content').get('pageNo') == 0:
             return True
         jobs = result.get('content').get('positionResult').get('result')
-        self.sheet.write(0, 0, 'positionName')
-        self.sheet.write(0, 1, 'salary')
-        self.sheet.write(0, 2, 'workYear')
-        self.sheet.write(0, 3, 'education')
-        self.sheet.write(0, 4, 'jobNature')
-        self.sheet.write(0, 5, 'city')
-        self.sheet.write(0, 6, 'companyShortName')
-        self.sheet.write(0, 7, 'district')
-        self.sheet.write(0, 8, 'positionLables')
-        self.sheet.write(0, 9, 'secondType')
-        self.sheet.write(0, 10, 'companyFullName')
 
         for job in jobs:
-            self.sheet.write(self.line, 0, job['positionName'])
-            self.sheet.write(self.line, 1, job['salary'])
-            self.sheet.write(self.line, 2, job['workYear'])
-            self.sheet.write(self.line, 3, job['education'])
-            self.sheet.write(self.line, 4, job['jobNature'])
-            self.sheet.write(self.line, 5, job['city'])
-            self.sheet.write(self.line, 6, job['companyShortName'])
-            self.sheet.write(self.line, 7, job['district'])
-            self.sheet.write(self.line, 8, job['positionLables'])
-            self.sheet.write(self.line, 9, job['secondType'])
-            self.sheet.write(self.line, 10, job['companyFullName'])
-            self.line += 1
+            job_db = data.Job()
+            job_db.searchName = self.searchername
+            job_db.positionName = job['positionName']
+            job_db.salary = job['salary']
+            job_db.workYear = job['workYear']
+            job_db.education = job['education']
+            job_db.jobNature = job['jobNature']
+            job_db.city = job['city']
+            job_db.companyShortName = job['companyShortName']
+            job_db.district = job['district']
+            job_db.positionLables = job['positionLables']
+            job_db.secondType = job['secondType']
+            job_db.positionName = job['positionName']
+
+            job_db.save()
 
         return False

@@ -26,10 +26,10 @@ class Job(Model):
     jobNature = CharField()
     city = CharField()
     companyShortName = CharField()
-    district = CharField()
-    positionLables = CharField()
+    district = CharField(null=True)
+    positionLables = CharField(null=True)
     secondType = CharField()
-    companyFullName = CharField()
+    companyFullName = CharField(null=True)
 
     class Meta:
         database = db  # This model uses the "jobs.db" database.
