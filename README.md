@@ -12,5 +12,5 @@
 * 跟工作相关的爬虫
 * 创建数据库表：python3 sql.py
 * 执行：python3 main.py
-* 创建图表：python3 matplot.py
+* 创建图表：python3 pyecharts.py
 
