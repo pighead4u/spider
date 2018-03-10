@@ -6,7 +6,7 @@
 * python：3.6.4
 * 依赖管理：pipreqs
 * orm：peewee
-* 图表：matplotlib
+* 图表：pyecharts
 
 ## jobs文件夹
 * 跟工作相关的爬虫

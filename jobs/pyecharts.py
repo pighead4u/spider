@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import matplotlib.pyplot as plt
+from __future__ import unicode_literals
+
 from data import Job
-from matplotlib import font_manager
+from pyecharts.charts import pie
 
 count_chengxi = Job.select().where((Job.city == '杭州') & (Job.district == '西湖区') | (Job.district == '余杭区')).count()
 count_binjiang = Job.select().where((Job.city == '杭州') & (Job.district == '滨江区') | (Job.district == '萧山区')).count()
@@ -23,25 +24,9 @@ count_jianggan = Job.select().where((Job.city == '杭州') & (Job.district == '�
 count_shangcheng = Job.select().where((Job.city == '杭州') & (Job.district == '上城区')).count()
 count_xiacheng = Job.select().where((Job.city == '杭州') & (Job.district == '下城区')).count()
 
-slices = [count_chengxi, count_binjiang, count_gongshu, count_jianggan, count_shangcheng, count_xiacheng]
-activities = [u'城西', u'滨江', u'拱墅', u'江干', u'上城', u'下城']
-cols = ['c', 'm', 'r', 'b', 'y', 'g']
+v1 = [count_chengxi, count_binjiang, count_gongshu, count_jianggan, count_shangcheng, count_xiacheng]
+attr = [u'城西', u'滨江', u'拱墅', u'江干', u'上城', u'下城']
 
-chinese_font = font_manager.FontProperties(fname='/System/Library/Fonts/PingFang.ttc')
-
-p = plt.pie(slices,
-            labels=activities,
-            colors=cols,
-            startangle=90,
-            shadow=False,
-            explode=(0, 0.1, 0, 0, 0, 0),
-            autopct='%1.1f%%')
-
-plt.title(u'Android岗位数量城区分布', fontproperties=chinese_font)
-plt.legend(prop=chinese_font)
-
-for front in p[1]:
-    front.set_fontproperties(font_manager.FontProperties(
-        fname='/System/Library/Fonts/PingFang.ttc'))
-
-plt.show()
+pie = pie.Pie("Android岗位数量城区分布")
+pie.add("", attr, v1, is_label_show=True)
+pie.render()
