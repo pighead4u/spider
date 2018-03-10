@@ -84,7 +84,7 @@ class Crawl:
             job_db.district = job['district']
             job_db.positionLables = job['positionLables']
             job_db.secondType = job['secondType']
-            job_db.positionName = job['positionName']
+            job_db.companyFullName = job['companyFullName']
 
             job_db.save()
 
