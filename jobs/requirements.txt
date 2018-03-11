@@ -1,3 +1,6 @@
-pyecharts==0.4.0
+jupyter-pip==0.3.1
+pyecharts-jupyter-installer==0.0.3
 requests==2.18.4
 peewee==3.1.2
+pyecharts==0.4.0
+fake-useragent==0.1.10

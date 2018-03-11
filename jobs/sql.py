@@ -16,4 +16,4 @@ import data
 
 data.db.connect()
 
-data.db.create_tables([data.Job, ])
+data.db.create_tables([data.Job])

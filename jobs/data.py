@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from peewee import *
+from peewee import CharField, Model, SqliteDatabase
 
 db = SqliteDatabase('jobs.db')
 

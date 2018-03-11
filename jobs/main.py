@@ -13,7 +13,10 @@
 # limitations under the License.
 from spider_lagou import Crawl
 
-cities = ["%E5%B9%BF%E5%B7%9E", "%E6%9D%AD%E5%B7%9E", "%E4%B8%8A%E6%B5%B7", "%E5%8C%97%E4%BA%AC", "%E6%B7%B1%E5%9C%B3"]
+cities = [
+    "%E5%B9%BF%E5%B7%9E", "%E6%9D%AD%E5%B7%9E", "%E4%B8%8A%E6%B5%B7",
+    "%E5%8C%97%E4%BA%AC", "%E6%B7%B1%E5%9C%B3"
+]
 filenames = ["guangzhou", 'hangzhou', 'shanghai', 'beijing', 'shenzhen']
 
 for (city, filename) in zip(cities, filenames):
