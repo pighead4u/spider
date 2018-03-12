@@ -14,3 +14,18 @@
 * 执行：python3 main.py
 * 创建图表：python3 pyecharts.py
 
+
+
+## 问题记录：
+
+### 数据存储：
+* 一开始用的是excel
+* 现在用的是sqlite，同时引入了ORM
+
+### 图表展现：
+* 一开始用的是matplotlib，但是由于中文问题，折腾了不少时间
+* 现在使用pyecharts，中文问题可以忽略
+
+### 数据过滤：
+* 正在尝试Bloom filter
+
